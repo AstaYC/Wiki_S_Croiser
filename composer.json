@@ -1,0 +1,15 @@
+{
+    "name": "youcode/wiki_s_croiser",
+    "autoload": {
+        "psr-4": {
+            "Youcode\\WikiSCroiser\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "yourname",
+            "email": "you@example.com"
+        }
+    ],
+    "require": {}
+}
