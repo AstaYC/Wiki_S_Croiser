@@ -1,13 +1,17 @@
 <?php
 namespace APP\Core\Connection;
 
+use Dotenv\Dotenv;
+use PDO;
+use PDOExpection;
+
 class DbConnection {
-    private satatic $instance ;
+    private static $instance ;
     private $pdo ;
 
     public function __construct(){
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
-        $dotenv = load();
+        $dotenv->load();
 
         $host = $_ENV['DB_HOST'];
         $root = $_ENV['DB_USER'];
@@ -23,7 +27,7 @@ class DbConnection {
         
     }
 
-    public static function getInstance (){
+    public static function getConnection (){
         if (!self::$instance){
             self::$instance = new self() ;
         }
