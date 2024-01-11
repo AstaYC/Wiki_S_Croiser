@@ -8,6 +8,7 @@ use App\Models\Users;
 class Authentification {
     public function joinAccess () {
         require __DIR__ . '/../../Views/Login.php';
+        require __DIR__ . '/../../Views/Register.php';
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             if(isset($_POST['register'])){
@@ -62,8 +63,5 @@ class Authentification {
             echo "Les Donnees ne recuperer pas";
         }
     }
-
 }
-
-
 ?>

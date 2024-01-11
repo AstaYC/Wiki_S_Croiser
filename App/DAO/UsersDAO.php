@@ -14,8 +14,11 @@ class UsersDAO {
         $query = "INSERT INTO users (nom,email,`password`,`type`) VALUES (?,?,?,?)";
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param('ssss',$users->getNom(),$users->getEmail(),$users->getPassword(),$users->getType());
-        if(!$stmt->execute()){
-            echo "il ya un probleme de stattement " . $stmt->error();
+
+        try {
+            $stmt->execute();
+        }catch(PDOExeption $e){
+            echo "Error" . $e->getMessage();
         }
     }
 
@@ -30,6 +33,7 @@ class UsersDAO {
         $row = $result->fetch_assoc();
         return $row ;
     }
+
 }
 
 ?>
