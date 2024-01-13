@@ -10,57 +10,59 @@ class WikiDAO {
         $this->conn = Connection::getConnection();
     }
 
-    public function createWiki (Wiki $wiki){
-        $query = "INSERT INTO wiki (nom,contenu,date,user_id,category_id) VALUES (?,?,?,?,?)";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("sssii",getNom(),getContenu(),getDate(),getUser(),getCategory());
-        
+    public function createWiki (Wiki $wiki , $archived){
         try{
-            $stmt->execute();
+          $query = "INSERT INTO wiki (nom,contenu,date,user_id,category_id,archived) VALUES (?,?,?,?,?,?)";
+          $stmt = $this->conn->prepare($query);        
+          $stmt->execute([getNom(),getContenu(),getDate(),getUser(),getCategory(),$archived]);
         }catch(PDOException $e){
             echo "Error" . $e->getMessage();
         }
     }
 
-    public function displayWiki (){
-        $query = "SELECT * FROM wiki";
-        $stmt = $this->conn->prepare($query);
-        
+    public function displayWiki(){
         try{
-            $stmt->execute();
+           $query = "SELECT wiki.* , categorie.* , users.* , wiki.nom AS wiki_nom ,categorie.nom AS categorie_nom , users.nom AS user_nom FROM `wiki` INNER JOIN users on users.id = user_id INNER JOIN categorie ON categorie.id = categorie_id WHERE archived = 1";
+           $stmt = $this->conn->prepare($query);
+           $stmt->execute();
         }catch(PDOException $e){
             echo "Error" . $e->getMessage();
         }
         
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-        return $row ;
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC) ;
+    }
+
+    public function displayWikiArch(){
+        try{
+           $query = "SELECT * FROM wiki WHERE archived = 0";
+           $stmt = $this->conn->prepare($query);
+           $stmt->execute();
+        }catch(PDOException $e){
+            echo "Error" . $e->getMessage();
+        }
+        
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC) ;
     }
 
     public function updateWiki(wiki $wiki) {
-       $query = "UPDATE wiki SET nom = ? , contenu = ? , date = ? , user_id = ? , category_id = ? WHERE id = ?";
-       $stmt = $this->conn->prepare($query);
-       $stmt->bind_param("sssii",getNom(),getContenu(),getDate(),getUser(),getCategory(),getId());
-       
-       try{
-         $stmt->execute();
+        try{
+           $query = "UPDATE wiki SET nom = ? , contenu = ? , date = ? , user_id = ? , category_id = ? WHERE id = ?";
+           $stmt = $this->conn->prepare($query);       
+           $stmt->execute([getNom(),getContenu(),getDate(),getUser(),getCategory(),getId()]);
        }catch(PDOException $e){
            echo "Error" . $e->getMessage();
         }
     }
 
     public function deleteWiki($id){
-       $query = "DELETE * FROM wiki WHERE id = ?";
-       $stmt = $this->conn->prepare($query);
-       $stmt->bind_param("i" , $id);
-
-       try{
-        $stmt->execute();
+        try{
+          $query = "DELETE FROM wiki WHERE id = ?";
+          $stmt = $this->conn->prepare($query);
+          $stmt->execute([$id]);
        }catch(PDOException $e){
          echo "Erreur :" . $e->getMessage();
        }
     }
-
 }
 
 ?>

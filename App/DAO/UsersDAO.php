@@ -33,6 +33,17 @@ class UsersDAO {
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
      }
+
+    public function displayUser (){
+        try{
+            $query = "SELECT * FROM users";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+        }  catch (\Exception $e){
+          echo "Error" . $e->getMessage();
+        }
+  
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
-    
+}
 ?>

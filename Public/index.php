@@ -5,6 +5,9 @@ require __DIR__ . "/../vendor/autoload.php";
 
 use App\Controllers\RegisterController;
 use App\Controllers\LoginController;
+use App\Controllers\DisplayUser;
+
+use App\Controllers\admin\WikiController;
 use App\Controllers\admin\CategorieController;
 use App\Controllers\admin\TagController;
 use App\Routes\Router;
@@ -25,6 +28,8 @@ $router->get('/',fn() => LoginController::display());
 $router->get('/register',fn () => RegisterController::index());
 $router->get('/login',fn() => LoginController::index());
 
+$router->get('/wiki',fn()=>WikiController::index());
+$router->get('/user',fn()=>DisplayUser::displayUser());
 $router->get('/categorie',fn()=> CategorieController::index());
 $router->get('/tag', fn()=>TagController::index());
 
@@ -33,6 +38,7 @@ $router->get('/tag', fn()=>TagController::index());
 
 $router->post('/register',fn()=>RegisterController::register());
 $router->post('/login', fn()=>LoginController::login());
+
 
 $router->post('/categorie/add',fn()=>CategorieController::addCategorie());
 $router->post('/categorie/update',fn()=>CategorieController::updateCategorie());

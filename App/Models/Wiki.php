@@ -10,7 +10,7 @@ class Wiki {
     private $user_id;
     private $category_id;
 
-    public function __construct($id,$nom,$contenu,$date){
+    public function __construct($id,$nom,$contenu,$date,$user_id,$category_id){
    
         $this->id = $id;
         $this->nom = $nom;

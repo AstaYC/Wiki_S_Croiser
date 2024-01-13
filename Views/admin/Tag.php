@@ -32,27 +32,27 @@
 		</a>
 		<ul class="side-menu top">
 			<li lass="active">
-				<a href="/">
+				<a href="/user">
 					<i class='bx bxs-dashboard' ></i>
-					<span class="text">My Categories</span>
+					<span class="text">USers</span>
 				</a>
 			</li>
 			<li  >
-				<a href="/tags">
+				<a href="/wiki">
 					<i class='bx bxs-shopping-bag-alt' ></i>
-					<span class="text">My Tags</span>
+					<span class="text">WiKis</span>
 				</a>
 			</li>
 			<li c>
-				<a href="user_page.php">
+				<a href="/categorie">
 					<i class='bx bxs-doughnut-chart' ></i>
-					<span class="text">users</span>
+					<span class="text">Categories</span>
 				</a>
 			</li>
 			<li >
-				<a href="vente.php">
+				<a href="/tag">
 					<i class='bx bxs-message-dots' ></i>
-					<span class="text">Vente</span>
+					<span class="text">TaGs</span>
 				</a>
 			</li>
 			<li>
