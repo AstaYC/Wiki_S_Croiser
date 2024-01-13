@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
-    <link rel="stylesheet" href="../Public/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../Public/assets/css/templatemo-style.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/templatemo-style.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -23,7 +23,7 @@
                   <div class="col-md-6 col-lg-7 d-flex align-items-center">
                     <div class="card-body p-4 p-lg-5 text-black">      
 
-                      <form method="POST">      
+                      <form method="POST" action=''>      
 
                         <div class="d-flex align-items-center mb-3 pb-1">
                           <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
@@ -43,7 +43,7 @@
                         </div>      
 
                         <div class="pt-1 mb-4">
-                          <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                          <button class="btn btn-dark btn-lg btn-block" name='login' type="submit">Login</button>
                         </div>      
 
                         <a class="small text-muted" href="#!">Forgot password?</a>

@@ -1,39 +1,38 @@
 <?php
-namespace App\DAO\UsersDAO;
+namespace App\DAO;
 
-use App\Core\Connection;
+use Config\Connection;
 use App\Models\Users;
 
 class UsersDAO {
     private $conn ;
     public function __construct(){
-        $this->conn = DbConnection::getConnection();
+        $this->conn = Connection::getConnection();
     }
 
-    public function createUser (Users $users){
-        $query = "INSERT INTO users (nom,email,`password`,`type`) VALUES (?,?,?,?)";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bind_param('ssss',$users->getNom(),$users->getEmail(),$users->getPassword(),$users->getType());
-
+    public function createUser(Users $user){
         try {
-            $stmt->execute();
-        }catch(PDOExeption $e){
-            echo "Error" . $e->getMessage();
+            $query = "INSERT INTO users (nom, email, password, type) VALUES (?, ?, ?, ?)";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute([$user->getNom(), $user->getEmail(), $user->getPassword(), $user->getType()]);
+        } catch (\Exception $e) {
+            echo "Error creating user: " . $e->getMessage();
         }
     }
+    
 
     public function getUserByEmail($email){
+        
+      try{
         $query = "SELECT * FROM users WHERE email = ? ";
         $stmt = $this->conn->prepare($query);
-        $stmt->bind_param('s', $email);
-        if($stmt->execute()){
-            echo "il ya un probleme de stattement" . $stmt->error();
+        $stmt->execute([$email]);
+        }catch(PDOException $e){
+            echo "error get message" . $e->getMessage();
         }
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-        return $row ;
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+     }
     }
-
-}
-
+    
 ?>

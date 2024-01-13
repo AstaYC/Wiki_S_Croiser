@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Wiki;
+namespace App\Models;
 
 class Wiki {
     private $id ;

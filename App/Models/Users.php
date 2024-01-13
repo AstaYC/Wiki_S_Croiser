@@ -1,8 +1,8 @@
 <?php
-namespace App\Models\Users;
+namespace App\Models;
 
 class Users {
-    private $id ;
+    private $id;
     private $nom;
     private $email;
     private $password;

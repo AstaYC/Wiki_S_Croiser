@@ -1,13 +1,13 @@
 <?php
-namespace App\DAO\Wiki;
+namespace App\DAO;
 
-use App\Core\Connection;
+use Config\Connection;
 use App\Models\Wiki;
 
 class WikiDAO {
     private $conn ;
     public function __construct(){
-        $this->conn = DbConnection::getConnection();
+        $this->conn = Connection::getConnection();
     }
 
     public function createWiki (Wiki $wiki){

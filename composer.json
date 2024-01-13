@@ -2,14 +2,17 @@
     "name": "youcode/wiki_s_croiser",
     "autoload": {
         "psr-4": {
-            "Youcode\\WikiSCroiser\\": "src/"
+            "App\\": "app/",
+            "Config\\":"config"
         }
     },
     "authors": [
         {
-            "name": "mohamed_amine",
-            "email": "you@gmail.com"
+            "name": "Mohamedamine",
+            "email": "baihmohamedamine@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
 }

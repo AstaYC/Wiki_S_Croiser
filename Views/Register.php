@@ -23,7 +23,7 @@
                   <div class="col-md-6 col-lg-7 d-flex align-items-center">
                     <div class="card-body p-4 p-lg-5 text-black">      
 
-                      <form method="POST">      
+                      <form method="POST" action="">      
 
                         <div class="d-flex align-items-center mb-3 pb-1">
                           <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
@@ -53,7 +53,7 @@
                         </div>      
 
                         <div class="pt-1 mb-4">
-                          <button class="btn btn-dark btn-lg btn-block" type="submit">Register </button>
+                          <button class="btn btn-dark btn-lg btn-block" name="register" type="submit">Register</button>
                         </div>      
 
                         <a class="small text-muted" href="#!">Forgot password?</a>
