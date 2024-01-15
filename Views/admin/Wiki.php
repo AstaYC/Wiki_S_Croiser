@@ -1,3 +1,10 @@
+<?php
+if($_SESSION['type'] != 'admin'){
+    header("Location:/author");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,13 +71,7 @@
 		</ul>
 		<ul class="side-menu">
 			<li>
-				<a href="#">
-					<i class='bx bxs-cog' ></i>
-					<span class="text">Settings</span>
-				</a>
-			</li>
-			<li>
-				<a href="#" class="logout">
+				<a href="/logout" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>
 					<span class="text">Logout</span>
 				</a>
@@ -108,7 +109,7 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>My Wikis</h1>
+					<h1>My Wikis! BIENVENUE <?=$_SESSION['nom']?></h1>
 				</div>
 				
 			</div>

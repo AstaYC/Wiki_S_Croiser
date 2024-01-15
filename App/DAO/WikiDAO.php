@@ -133,6 +133,25 @@ class WikiDAO {
             }
         }
     }
+
+             public function serachWiki($keyWord){
+                try{
+                    $query = "SELECT wiki.*, categorie.nom AS categorie_nom, users.nom AS user_nom
+                    FROM wiki
+                    INNER JOIN users ON users.id = wiki.user_id
+                    INNER JOIN categorie ON categorie.id = wiki.categorie_id
+                    WHERE wiki.archived = 1
+                    AND (wiki.nom LIKE '%$keyWord%' OR categorie.nom LIKE '%$keyWord%')
+                    ";
+                    $stmt = $this->conn->prepare($query);
+                    $stmt->execute();
+                 }catch(PDOException $e){
+                     echo "Error" . $e->getMessage();
+                 }
+                 
+                 return $stmt->fetchAll(\PDO::FETCH_ASSOC) ;
+             } 
 }
 
+    
 ?>

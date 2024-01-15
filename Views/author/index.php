@@ -28,7 +28,17 @@
 </head>
 
 <body>
-
+<div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bs-tertiary-bg justify-content-between">
+            <a class="tm-site-logo navbar-brand" href="#"></a>
+ 
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="fs-4 text-light nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -38,11 +48,13 @@
                     <h1 class="pl-4 tm-site-title">Timeless</h1>
                     <br>
                     <br>
+                    <?php if (!empty($_SESSION['type'])) { ?>
                     <h1 class="pl-4 tm-site-title">BIENVENUE <?=$_SESSION['nom']?></h1>
                     <br><br>
-                    <div class="">
-                        <a href="/author/parametre" class="btn btn-secondary"><i class="material-icons">&#xE8B8;</i> <span>Gerer Votre WiKis</span></a>								
-					</div>
+                       <div class="">
+                       <a href="/author/parametre" class="btn btn-secondary"><i class="material-icons">&#xE8B8;</i> <span>Gerer Votre WiKis</span></a>								
+                       </div>
+                    <?php } ?>
                 </header>
             </div>
             <!-- add modal -->
@@ -111,84 +123,19 @@
         </div>
         <div class="container tm-container-2">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12 d-flex justify-content-space-between align-items-center" style="justify-content: space-around">
                     <h1 class="tm-welcome-text">Welcome to Timeless</h1>
+				       <div class="form-input">
+					<input id ="keyword" type="search" placeholder="Search...">
+					<button onclick="searchkey()" type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				       </div>
                 </div>
             </div>
-            <?php foreach($row as $wiki) { ?>
-            <div class="row tm-section-mb">
-                <div class="col-lg-12">
-                    <div class=" tm-timeline-item">
-                        <div class="tm-timeline-item-inner">
-                            <img src="\assets/img/img-01.jpg" alt="Image" class="rounded-circle tm-img-timeline">
-                            <div class="tm-timeline-connector">
-                                <p class="mb-0">&nbsp;</p>
-                            </div>
-                            <div class="tm-timeline-description-wrap">
-                                <div class="tm-bg-dark tm-timeline-description">
-                                    <h1 class="tm-font-400"><?=$wiki['nom']?></h1>
-                                    <p class="tm-text-green float-right mb-0">Crée Par <?=$wiki['user_nom']?> . <?=$wiki['date']?></p>
-                                </div>
-                            </div>
-                            <div class="tm-timeline-connector">
-                                <p class="mb-0">&nbsp;</p>
-                            </div>
-                            <div class="tm-timeline-description-wrap">
-                                <div class="tm-bg-dark tm-timeline-description">
-                                   <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#contentModel<?=$wiki['id']?>">Continuée ici</button>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="tm-timeline-connector-vertical"></div>
-                    </div>
-                </div>
-            </div>
+            <!-- div content -->
+            <div id="divCont">
 
-            <!-- content model -->
-            <div  id ="contentModel<?=$wiki['id']?>" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-     
-     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-    <div class="container mt-4">
-     <div class="row">
-         <!-- Colonne pour l'image -->
-         <div class="col-lg-12 text-center">
-             <img src="\assets/img/img-01.jpg" alt="Image" class="img-fluid mb-3">
-         </div>
-     </div>
-     <div class="row">
-         <!-- Colonne pour le contenu -->
-         <div class="col-lg-12">
-             <h1 class="text-dark mb-3"><?=$wiki['nom']?></h1>
-             <p class="text-dark"><?=$wiki['contenu']?></p>
-         </div>
-     </div>
-     <div class="row">
-         <!-- Colonne pour les catégories et les tags -->
-         <div class="col-lg-12">
-             <div class="mb-2">
-                 <strong class="text-dark" >Catégories:</strong>
-                 <span class="text-dark" ><?=$wiki['categorie_nom']?></span>
-             </div>
-             <div class="mb-2">
-                 <strong class="text-dark" >Les Tags:</strong>
-                 <span class="text-dark" >Tag 1, Tag 2, Tag 3</span>
-             </div>
-         </div>
-     </div>
-     <div class="row">
-         <!-- Colonne pour la date -->
-         <div class="col-lg-12 text-right">
-             
-              <p class="text-dark" >Crée Par <?=$wiki['user_nom']?> . <?=$wiki['date']?></p>
-         </div>
-     </div>
- </div>
-        </div>
-      </div>
-     </div>
-            <?php } ?>
+            </div>
+            
             <!--  row -->
             <hr>
             <div class="row tm-section-mb tm-section-mt">
@@ -242,5 +189,54 @@
         </footer>
     </div>
     
+    <script>
+    function getTags(id) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/ajax?wikiId=" + id, true);
+        xhr.onreadystatechange = function () {
+            console.log(xhr.readyState);
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var responses = JSON.parse(this.responseText);
+                const tagContentElement = document.querySelector(`#contentModel${id} #tag-content`);
+                  
+                if ( responses.length == 0){
+                    // Utilisation de += au lieu de + pour concaténer les valeurs
+                    tagContentElement.innerHTML = 'Aucun tag disponible.';
+                }else{
+                    tagContentElement.innerHTML = '';
+                    for(let i = 0; i < responses.length; i++) {
+                        // Utilisation de += au lieu de + pour concaténer les valeurs
+                        tagContentElement.innerHTML += responses[i].nom;
+                    }
+                }
+            }
+        };
+        xhr.send();
+    }
+</script>
+      
+
+<script>
+     function searchkey(){
+        var xhr = new XMLHttpRequest();
+        var keyword = document.querySelector('#keyword').value;
+        xhr.open("GET", "/search?keyWord=" + keyword, true);
+        xhr.onreadystatechange = function () {
+            console.log(xhr.readyState);
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(this.responseText);
+                var responses = this.responseText;
+                var tagContentElement = document.querySelector(`#divCont`);
+
+                        // Utilisation de += au lieu de + pour concaténer les valeurs
+                        tagContentElement.innerHTML = responses;
+            }
+        };
+        xhr.send();
+
+     }
+     searchkey();
+</script>
+
 </body>
 </html>

@@ -6,6 +6,8 @@ require __DIR__ . "/../vendor/autoload.php";
 use App\Controllers\RegisterController;
 use App\Controllers\LoginController;
 use App\Controllers\DisplayUser;
+use App\Controllers\Logout;
+use App\DAO\WikiTagDAO;
 
 use App\Controllers\admin\WikiController;
 use App\Controllers\admin\CategorieController;
@@ -25,7 +27,6 @@ $router = new Router();
 
 // ------> GET ROUTER ;
 
-$router->get('/',fn() => LoginController::display());
 $router->get('/register',fn () => RegisterController::index());
 $router->get('/login',fn() => LoginController::index());
 
@@ -37,6 +38,12 @@ $router->get('/tag', fn()=>TagController::index());
 
 $router->get('/author', fn()=>WikiAuthorController::index());
 $router->get('/author/parametre', fn()=>WikiAuthorController::gererWiki());
+$tagWiki = new WikiTagDAO; 
+$router->get('/ajax',fn()=>$tagWiki->index());
+
+$router->get('/logout',fn()=>Logout::logout());
+
+$router->get('/search',fn()=>WikiAuthorController::search());
 
 //----> POST ROUTER ;
 

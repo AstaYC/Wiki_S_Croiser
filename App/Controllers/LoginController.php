@@ -6,10 +6,6 @@ use App\Models\Users;
 use App\DAO\UsersDAO;
 
 class LoginController {
-    public static function display(){
-        
-        require __DIR__ . '/../../Views/author/index.php';
-    }
 
     public static function index (){
         require __DIR__ . '/../../Views/Login.php';        
@@ -31,12 +27,12 @@ class LoginController {
                     $_SESSION['email'] = $email;
                     $_SESSION['nom']=$row[0]['nom'];
                     $_SESSION['id'] = $row[0]['id'];
-                    $_SESSION['type'] = $row['type'];
+                    $_SESSION['type'] = $row[0]['type'];
                     if($row[0]['type'] == 'admin'){
-                        header('location:');
+                        header('location:/wiki');
                     }
                     else if ($row[0]['type'] == 'author'){
-                        header('location:/');
+                        header('location:/author');
                     }
                     else{
                        echo "Il ya aucun role specifique !";

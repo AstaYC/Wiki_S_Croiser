@@ -27,7 +27,7 @@ class RegisterController {
                     $users = new Users($id,$nom,$email,$passwordHached,$type);
                     $register = new UsersDAO();
                     $register->createUser($users);
-                    header("location:/");
+                    header("location:/login");
                 }
         }
     }

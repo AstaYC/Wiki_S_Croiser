@@ -27,7 +27,7 @@
 
                         <div class="d-flex align-items-center mb-3 pb-1">
                           <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-                          <span class="h1 fw-bold mb-0">Logo</span>
+                          <span class="h1 fw-bold mb-0">Welcome to Registration Page!</span>
                         </div>      
 
                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>      
@@ -58,7 +58,7 @@
 
                         <a class="small text-muted" href="#!">Forgot password?</a>
                         <p class="mb-5 pb-lg-2" style="color: #393f81;">Do you have an account? 
-                        <a href="#!"style="color: #393f81;">Login here</a></p>
+                        <a href="/login"style="color: #393f81;">Login here</a></p>
                       
                       </form>      
 
