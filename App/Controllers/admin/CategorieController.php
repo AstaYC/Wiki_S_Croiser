@@ -8,7 +8,7 @@ use App\Models\Categorie;
 class CategorieController {
     
     public static function index () {
-        $display = new CategorieDAO ;
+        $display = new CategorieDAO() ;
         $row = $display->displayCategorie();
         require __DIR__ . '/../../../Views/admin/Categorie.php';
     }

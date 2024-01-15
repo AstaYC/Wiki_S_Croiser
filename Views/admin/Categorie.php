@@ -46,19 +46,19 @@
 			<li c>
 				<a href="/categorie">
 					<i class='bx bxs-doughnut-chart' ></i>
-					<span class="text">CaTegorie</span>
+					<span class="text">Categories</span>
 				</a>
 			</li>
 			<li >
 				<a href="/tag">
 					<i class='bx bxs-message-dots' ></i>
-					<span class="text">TaGs</span>
+					<span class="text">Tags</span>
 				</a>
 			</li>
 			<li>
-				<a href="#">
-					<i class='bx bxs-group' ></i>
-					<span class="text">Team</span>
+				<a href="/wikiArchive">
+				    <i class='bx bxs-archive' ></i>
+					<span class="text">Les Wikis Archivee</span>
 				</a>
 			</li>
 		</ul>
@@ -108,7 +108,7 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>My WiKis</h1>
+					<h1>My Categories</h1>
 				</div>
 				
 			</div>
@@ -120,14 +120,14 @@
 						<div class="table-title">
 							<div class="row">
 								<div class="col-sm-5">
-									<h2>WiKIs <b>Management</b></h2>
+									<h2>Categories <b>Management</b></h2>
 								</div>
 								<div class="modal" id="addCategorieModal">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<!-- Modal Header -->
 											<div class="modal-header">
-												<h4 class="modal-title text-primary">Add New Wiki</h4>
+												<h4 class="modal-title text-primary">Add New Categorie</h4>
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
 											</div>
 											<!-- Modal Body -->
@@ -136,12 +136,12 @@
 												<form method="POST" action="/categorie/add">
 													<!-- Input fields for medicine details -->
 													<div class="form-group">
-														<label for="CategorieName">WiKi Name:</label>
+														<label for="CategorieName">Categorie Name:</label>
 														<input type="text" class="form-control" id="CategorieName" placeholder="CategorieName" name="nom" required>
 													</div>
 													<div class="modal-footer">
 														<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-														<button type="submit" name="add" class="btn btn-primary">Add Wiki</button>
+														<button type="submit" name="add" class="btn btn-primary">Add Categorie</button>
 													</div>
 												</form>
 											</div>
@@ -158,9 +158,7 @@
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>Nom de Wiki</th>						
-									<th>Nom de Wiki</th>						
-									<th>Nom de Wiki</th>						
+									<th>Nom de Categorie</th>											
 									<th>Action</th>
 								</tr>
 							</thead>
@@ -186,7 +184,7 @@
 											<div class="modal-content">
 												<!-- Modal Header -->
 												<div class="modal-header">
-													<h4 class="modal-title">Update WiKi</h4>
+													<h4 class="modal-title">Update Categorie</h4>
 													<button type="button" class="close" data-dismiss="modal">&times;</button>
 												</div>
 												<!-- Modal Body -->
@@ -198,12 +196,12 @@
 
 														<!-- Input fields for updated medicine details -->
 														<div class="form-group">
-															<label for="updateMedicineName">Wiki Name:</label>
+															<label for="updateMedicineName">Categorie Name:</label>
 															<input type="text" class="form-control" id="updateCategoryName" name="nom" value="<?= $categorie['nom'] ?>" required>
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-															<button type="submit" class="btn btn-primary">Update WiKi</button>
+															<button type="submit" class="btn btn-primary">Update Categorie</button>
 														</div>
 													</form>
 												</div>
@@ -216,7 +214,7 @@
 											<div class="modal-content">
 												<!-- Modal Header -->
 												<div class="modal-header">
-													<h4 class="modal-title">Delete WiKi</h4>
+													<h4 class="modal-title">Delete Categorie</h4>
 													<button type="button" class="close" data-dismiss="modal">&times;</button>
 												</div>
 												<!-- Modal Body -->
@@ -225,10 +223,10 @@
 													<form method="POST" action="/categorie/delete">
 													<input type="hidden" name="action" value="delete">
 														<input type="hidden" name="id" value="<?= $categorie['id'] ?>">
-														<p>Are you sure you want to delete this WiKi?</p>
+														<p>Are you sure you want to delete this Categorie?</p>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-															<button type="submit" class="btn btn-danger">Delete WiKi</button>
+															<button type="submit" class="btn btn-danger">Delete Categorie</button>
 														</div>
 													</form>
 												</div>

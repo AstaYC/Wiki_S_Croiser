@@ -6,8 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Timeless One-Page HTML Template</title>
-
+    <title>Timeless</title>
+     	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    
     <!-- load CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
     <!-- Google web font "Open Sans" -->
@@ -22,39 +33,59 @@
         <div class="row">
             <div class="col-lg-12">
                 <header class="text-center tm-site-header">
+
                     <div class="tm-site-logo"></div>
                     <h1 class="pl-4 tm-site-title">Timeless</h1>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-lg-auto">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="index.html">Home</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="about.html">About</a>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
-
-                                <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                                    <li><a class="dropdown-item" href="listing-page.html">Listing Page</a></li>
-
-                                    <li><a class="dropdown-item" href="detail-page.html">Detail Page</a></li>
-                                </ul>
-                            </li>
-    
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
-                            </li>
-                        </ul>
-
-                        <div class="ms-4">
-                            <a href="#section_3" class="btn custom-btn custom-border-btn smoothscroll">Get started</a>
-                        </div>
-                    </div>
+                    <br>
+                    <br>
+                    <h1 class="pl-4 tm-site-title">BIENVENUE <?=$_SESSION['nom']?></h1>
+                    <br><br>
+                    <div class="">
+                        <a href="/author/parametre" class="btn btn-secondary"><i class="material-icons">&#xE8B8;</i> <span>Gerer Votre WiKis</span></a>								
+					</div>
                 </header>
             </div>
+            <!-- add modal -->
+            <div class="modal" id="addCategorieModal">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<!-- Modal Header -->
+											<div class="modal-header">
+												<h4 class="modal-title text-primary">Add New WiKis</h4>
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+											</div>
+											<!-- Modal Body -->
+											<div class="modal-body">
+												<form method="POST" action="/wiki/add">
+													<div class="form-group">
+														<label for="CategorieName">WiKi Name:</label>
+														<input type="text" class="text-dark form-control" id="CategorieName" placeholder="Le Nom De WiKi" name="nom" required>
+														<label for="myTextarea">Contenu De Wiki:</label>
+														<textarea  class=" text-dark form-control" id="myTextarea" placeholder="Le Contenu" name="contenu" rows="4" cols="50" required></textarea>
+                                                        <label for="Categorie">La Categorie</label>
+														<select type="text" class="text-dark form-control" id="Categorie" placeholder="CategorieName" name="categorie" required>
+                                                               <?php foreach ($cateRow as $categorie){ ?>  
+														       <option class="text-dark" value="<?=$categorie['id']?>"><?=$categorie['nom']?></option>
+															   <?php } ?>
+                                                        </select>
+                                                        <label>Les Tags</label>
+                                                    
+                                                        <select id="mySelect" name="tags[]" multiple style="width: 100%; " placeholder="u can">
+                                                              <?php foreach($tagRow as $tag) {?>
+                                                              <option class="text-dark" value="<?=$tag['id']?>"><?=$tag['nom']?></option>
+                                                              <?php } ?>
+                                                       </select>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+														<button type="submit" name="add" class="btn btn-primary">Add Wiki</button>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+            <!-- add modal -->
         </div>
         <div class="row">
             <div class="col-lg-12">
@@ -81,9 +112,10 @@
         <div class="container tm-container-2">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="tm-welcome-text">Welcome to Timeless</h2>
+                    <h1 class="tm-welcome-text">Welcome to Timeless</h1>
                 </div>
             </div>
+            <?php foreach($row as $wiki) { ?>
             <div class="row tm-section-mb">
                 <div class="col-lg-12">
                     <div class=" tm-timeline-item">
@@ -94,18 +126,69 @@
                             </div>
                             <div class="tm-timeline-description-wrap">
                                 <div class="tm-bg-dark tm-timeline-description">
-                                    <h3 class="tm-text-green tm-font-400">Nulla venenatis purus nec quam</h3>
-                                    <p>You may tell your co-workers about TemplateMo free stuffs to download and use for any website project. Thank you for supporting us.</p>
-                                    <p class="tm-text-green float-right mb-0">New Event . 12 July 2018</p>
+                                    <h1 class="tm-font-400"><?=$wiki['nom']?></h1>
+                                    <p class="tm-text-green float-right mb-0">Crée Par <?=$wiki['user_nom']?> . <?=$wiki['date']?></p>
+                                </div>
+                            </div>
+                            <div class="tm-timeline-connector">
+                                <p class="mb-0">&nbsp;</p>
+                            </div>
+                            <div class="tm-timeline-description-wrap">
+                                <div class="tm-bg-dark tm-timeline-description">
+                                   <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#contentModel<?=$wiki['id']?>">Continuée ici</button>
                                 </div>
                             </div>
                         </div>
-
+                    
                         <div class="tm-timeline-connector-vertical"></div>
                     </div>
-
                 </div>
             </div>
+
+            <!-- content model -->
+            <div  id ="contentModel<?=$wiki['id']?>" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+     
+     <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+    <div class="container mt-4">
+     <div class="row">
+         <!-- Colonne pour l'image -->
+         <div class="col-lg-12 text-center">
+             <img src="\assets/img/img-01.jpg" alt="Image" class="img-fluid mb-3">
+         </div>
+     </div>
+     <div class="row">
+         <!-- Colonne pour le contenu -->
+         <div class="col-lg-12">
+             <h1 class="text-dark mb-3"><?=$wiki['nom']?></h1>
+             <p class="text-dark"><?=$wiki['contenu']?></p>
+         </div>
+     </div>
+     <div class="row">
+         <!-- Colonne pour les catégories et les tags -->
+         <div class="col-lg-12">
+             <div class="mb-2">
+                 <strong class="text-dark" >Catégories:</strong>
+                 <span class="text-dark" ><?=$wiki['categorie_nom']?></span>
+             </div>
+             <div class="mb-2">
+                 <strong class="text-dark" >Les Tags:</strong>
+                 <span class="text-dark" >Tag 1, Tag 2, Tag 3</span>
+             </div>
+         </div>
+     </div>
+     <div class="row">
+         <!-- Colonne pour la date -->
+         <div class="col-lg-12 text-right">
+             
+              <p class="text-dark" >Crée Par <?=$wiki['user_nom']?> . <?=$wiki['date']?></p>
+         </div>
+     </div>
+ </div>
+        </div>
+      </div>
+     </div>
+            <?php } ?>
             <!--  row -->
             <hr>
             <div class="row tm-section-mb tm-section-mt">
@@ -158,6 +241,6 @@
             </div>
         </footer>
     </div>
-
+    
 </body>
 </html>

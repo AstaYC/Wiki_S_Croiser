@@ -16,7 +16,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="assets/css/dashboard.css">
 
-	<title>My TAGS</title>
+	<title>My WiKiS</title>
 </head>
 <style>
 
@@ -57,7 +57,7 @@
 			</li>
 			<li>
 				<a href="/wikiArchive">
-				    <i class='bx bxs-archive' ></i>
+					<i class='bx bxs-archive' ></i>
 					<span class="text">Les Wikis Archivee</span>
 				</a>
 			</li>
@@ -86,7 +86,7 @@
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link">TAGS</a>
+			<a href="#" class="nav-link">WiKis</a>
 			<form action="#">
 				<div class="form-input">
 					<input type="search" placeholder="Search...">
@@ -108,7 +108,7 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>My TAGS</h1>
+					<h1>My Wikis Archivée</h1>
 				</div>
 				
 			</div>
@@ -120,37 +120,7 @@
 						<div class="table-title">
 							<div class="row">
 								<div class="col-sm-5">
-									<h2>TAGS <b>Management</b></h2>
-								</div>
-								<div class="modal" id="addTagModal">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<!-- Modal Header -->
-											<div class="modal-header">
-												<h4 class="modal-title text-primary">Add New TAGS</h4>
-												<button type="button" class="close" data-dismiss="modal">&times;</button>
-											</div>
-											<!-- Modal Body -->
-											<div class="modal-body">
-												<!-- Add medicine form -->
-												<form method="POST" action="/tag/add">
-													<!-- Input fields for medicine details -->
-													<div class="form-group">
-														<label for="TagName">TAGS Name:</label>
-														<input type="text" class="form-control" id="TagName" placeholder="TagName" name="nom" required>
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-														<button type="submit" name="add" class="btn btn-primary">Add TAGS</button>
-													</div>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-7">
-									<!-- <a href="" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New Categories</span></a> -->
-									<a href="" class="btn btn-secondary" data-toggle="modal" data-target="#addTagModal"><i class="material-icons">&#xE147;</i> <span>Add New Tags</span></a>				
+									<h2>WiKis <b>Management</b></h2>
 								</div>
 							</div>
 						</div>
@@ -158,83 +128,57 @@
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>Nom de Tag</th>						
+									<th>Nom de Wiki</th>						
+									<th>Contenu du WiKi</th>						
+									<th>Date de Creation</th>						
+									<th>Cree PAR</th>						
+									<th>Categorie</th>						
 									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>	
-	                            <?php foreach($row as $tag) { ?>					
+							<?php foreach($row as $wiki){?>
 								<tr>
-									<td><?=$tag['id']?></td>
-									<td><?=$tag['nom']?></td>
+									<td><?=$wiki['id']?></td>
+									<td><?=$wiki['nom']?></td>
+									<td><?=$wiki['contenu']?></td>
+									<td><?=$wiki['date']?></td>
+									<td><?=$wiki['user_nom']?></td>
+									<td><?=$wiki['categorie_nom']?></td>
 									<td>
-											<a href="#" class="settings" title="Settings" data-toggle="modal" data-target="#updateTagModal<?=$tag['id']?>">
-												<i class="material-icons">&#xE8B8;</i>
+											<a href="#" class="delete" title="Delete" data-toggle="modal" data-target="#recupereWikiModal<?=$wiki['id']?>">
+												<i class="material-icons">&#xE5CA;</i>
 											</a>
-											<a href="#" class="delete" title="Delete" data-toggle="modal" data-target="#deleteTagModal<?=$tag['id']?>">
-												<i class="material-icons">&#xE5C9;</i>
-											</a>
-										</td>
+									</td>
 								</tr>
 
-
-                        <!-- modal de update -->
-								<div class="modal" id="updateTagModal<?=$tag['id']?>">
-								<div class="modal-dialog">
-											<div class="modal-content">
-												<!-- Modal Header -->
-												<div class="modal-header">
-													<h4 class="modal-title">Update Tag</h4>
-													<button type="button" class="close" data-dismiss="modal">&times;</button>
-												</div>
-												<!-- Modal Body -->
-												<div class="modal-body">
-													<!-- Update medicine form -->
-													<form method="POST" action="/tag/update">
-														<input type="hidden" name="action" value="update">
-														<input type="hidden" name="id" value="<?=$tag['id']?>">
-
-														<!-- Input fields for updated medicine details -->
-														<div class="form-group">
-															<label for="updateMedicineName">Nom du Tag:</label>
-															<input type="text" class="form-control" id="updateCategoryName" name="nom" value="<?=$tag['nom']?>" required>
-														</div>
-														<div class="modal-footer">
-															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-															<button type="submit" class="btn btn-primary">Update Tag</button>
-														</div>
-													</form>
-												</div>
-											</div>
-										</div>
-									</div>
                        <!-- Delete Medicine Modal -->
-                                <div class="modal" id="deleteTagModal<?=$tag['id']?>">										
+                                <div class="modal" id="recupereWikiModal<?= $wiki['id']?>">										
                                   <div class="modal-dialog">
 											<div class="modal-content">
 												<!-- Modal Header -->
 												<div class="modal-header">
-													<h4 class="modal-title">Delete Tag</h4>
+													<h4 class="modal-title">Recuperation de WiKi</h4>
 													<button type="button" class="close" data-dismiss="modal">&times;</button>
 												</div>
 												<!-- Modal Body -->
 												<div class="modal-body">
 													<!-- Delete medicine form -->
-													<form method="POST" action="/tag/delete">
+													<form method="POST" action="/wiki/recuperer">
 													<input type="hidden" name="action" value="delete">
-														<input type="hidden" name="id" value="<?=$tag['id']?>">
-														<p>Are you sure you want to delete this Tag?</p>
+														<input type="hidden" name="id" value="<?= $wiki['id'] ?>">
+														<p>Are you sure you want to recuperer this WiKi?</p>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-															<button type="submit" class="btn btn-danger">Delete Tag</button>
+															<button type="submit" class="btn btn-info">Recuperer WiKi</button>
 														</div>
 													</form>
 												</div>
 											</div>
 										</div>
 									</div>
-                                <?php } ?>
-                            </tbody>
+							 <?php } ?>
+                         </tbody>
 						</table>
 					</div>
 				</div>

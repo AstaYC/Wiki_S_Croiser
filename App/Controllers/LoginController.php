@@ -7,6 +7,7 @@ use App\DAO\UsersDAO;
 
 class LoginController {
     public static function display(){
+        
         require __DIR__ . '/../../Views/author/index.php';
     }
 
@@ -28,6 +29,7 @@ class LoginController {
         
                 if(password_verify($password,$row[0]['password'])){
                     $_SESSION['email'] = $email;
+                    $_SESSION['nom']=$row[0]['nom'];
                     $_SESSION['id'] = $row[0]['id'];
                     $_SESSION['type'] = $row['type'];
                     if($row[0]['type'] == 'admin'){

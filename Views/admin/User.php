@@ -56,9 +56,9 @@
 				</a>
 			</li>
 			<li>
-				<a href="#">
-					<i class='bx bxs-group' ></i>
-					<span class="text">Team</span>
+				<a href="/wikiArchive">
+				    <i class='bx bxs-archive' ></i>
+					<span class="text">Les Wikis Archivee</span>
 				</a>
 			</li>
 		</ul>

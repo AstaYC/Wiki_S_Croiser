@@ -14,7 +14,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="assets/css/dashboard.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.19.0/font/bootstrap-icons.css" rel="stylesheet">
+<link rel="stylesheet" href="/../assets/css/dashboard.css">
 
 	<title>My WiKiS</title>
 </head>
@@ -28,57 +29,18 @@
 	<section id="sidebar">
 		<a href="#" class="brand">
 			<i class='bx bxs-smile'></i>
-			<span class="text">Admin</span>
+			<span class="text">User</span>
 		</a>
 		<ul class="side-menu top">
 			<li lass="active">
-				<a href="/user">
-					<i class='bx bxs-dashboard' ></i>
-					<span class="text">USers</span>
+				<a href="/author">
+					<i class='bx bxs-dashboard'></i>
+					<span class="text">Retourner a la page principale</span>
 				</a>
 			</li>
-			<li  >
-				<a href="/wiki">
-					<i class='bx bxs-shopping-bag-alt' ></i>
-					<span class="text">WiKis</span>
-				</a>
-			</li>
-			<li c>
-				<a href="/categorie">
-					<i class='bx bxs-doughnut-chart' ></i>
-					<span class="text">Categories</span>
-				</a>
-			</li>
-			<li >
-				<a href="/tag">
-					<i class='bx bxs-message-dots' ></i>
-					<span class="text">Tags</span>
-				</a>
-			</li>
-			<li>
-				<a href="/wikiArchive">
-				    <i class='bx bxs-archive' ></i>
-					<span class="text">Les Wikis Archivee</span>
-				</a>
-			</li>
-		</ul>
-		<ul class="side-menu">
-			<li>
-				<a href="#">
-					<i class='bx bxs-cog' ></i>
-					<span class="text">Settings</span>
-				</a>
-			</li>
-			<li>
-				<a href="#" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
-					<span class="text">Logout</span>
-				</a>
-			</li>
-		</ul>
-	</section>
+        </ul>       
+     </section>
 	<!-- SIDEBAR -->
-
 
 
 	<!-- CONTENT -->
@@ -99,7 +61,7 @@
 				<span class="num">8</span>
 			</a>
 			<a href="#" class="profile">
-				<img src="img/people.png">
+				<img src="../img/people.png">
 			</a>
 		</nav>
 		<!-- NAVBAR -->
@@ -120,7 +82,7 @@
 						<div class="table-title">
 							<div class="row">
 								<div class="col-sm-5">
-									<h2>WiKis <b>Management</b></h2>
+									<h2>WiKis User <b>Management</b></h2>
 								</div>
 								<div class="modal" id="addCategorieModal">
 									<div class="modal-dialog">
@@ -133,7 +95,7 @@
 											<!-- Modal Body -->
 											<div class="modal-body">
 												<!-- Add medicine form -->
-												<form method="POST" action="/wiki/add">
+												<form method="POST" action="/author/parametre/add">
 													<!-- Input fields for medicine details -->
 													<div class="form-group">
 														<label for="CategorieName">WiKi Name:</label>
@@ -146,7 +108,18 @@
 														       <option value="<?=$categorie['id']?>"><?=$categorie['nom']?></option>
 															   <?php } ?>
                                                         </select>
-													</div>
+                                                        <br>
+                                                        <div class="form-group">
+                                                            <label>Les Tags :</label><br>
+                                                            <?php foreach($tagRow as $tag) { ?>
+                                                              <div class="form-check">
+                                                                 <input type="checkbox" class="form-check-input" id="tag<?=$tag['id']?>" name="tags[]" value="<?=$tag['id']?>">
+                                                                 <label class="form-check-label" for="tag<?=$tag['id']?>"><?=$tag['nom']?></label>
+                                                              </div>
+                                                            <?php } ?>
+                                                        </div>
+
+													</div>  
 													<div class="modal-footer">
 														<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 														<button type="submit" name="add" class="btn btn-primary">Add Wiki</button>
@@ -171,7 +144,6 @@
 									<th>Date de Creation</th>						
 									<th>Cree PAR</th>						
 									<th>Categorie</th>						
-									<th>Ajouter TAGS</th>						
 									<th>Action</th>
 								</tr>
 							</thead>
@@ -184,18 +156,13 @@
 									<td><?=$wiki['date']?></td>
 									<td><?=$wiki['user_nom']?></td>
 									<td><?=$wiki['categorie_nom']?></td>
-									<td>
-									        <a href="#" class="tag" title="Delete" data-toggle="modal" data-target="#addTagModal<?=$wiki['id']?>">
-											  <i class='bx bx-hash'></i>
-											</a>	
-									</td>
 									
 									<td>
 											<a href="#" class="settings" title="Settings" data-toggle="modal" data-target="#updateCategoryModal<?=$wiki['id']?>">
 												<i class="material-icons">&#xE8B8;</i>
 											</a>
 											<a href="#" class="delete" title="Delete" data-toggle="modal" data-target="#deleteCategoryModal<?=$wiki['id']?>">
-											    <i class='bx bxs-archive' ></i>
+											    <i class='bx bx-trash' ></i>
 											</a>
 									</td>
 								</tr>
@@ -204,31 +171,48 @@
                         <!-- modal de update -->
 								<div class="modal" id="updateCategoryModal<?=$wiki['id']?>">
 								<div class="modal-dialog">
-											<div class="modal-content">
-												<!-- Modal Header -->
-												<div class="modal-header">
-													<h4 class="modal-title">Update Category</h4>
-													<button type="button" class="close" data-dismiss="modal">&times;</button>
-												</div>
-												<!-- Modal Body -->
-												<div class="modal-body">
-													<!-- Update medicine form -->
-													<form method="POST" action="/categorie/update">
-														<input type="hidden" name="action" value="update">
-														<input type="hidden" name="id" value="<?= $wiki['id'] ?>">
-
-														<!-- Input fields for updated medicine details -->
-														<div class="form-group">
-															<label for="updateMedicineName">Category Name:</label>
-															<input type="text" class="form-control" id="updateCategoryName" name="nom" value="<?= $wiki['nom'] ?>" required>
-														</div>
-														<div class="modal-footer">
-															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-															<button type="submit" class="btn btn-primary">Update Category</button>
-														</div>
-													</form>
-												</div>
+                                <div class="modal-content">
+											<!-- Modal Header -->
+											<div class="modal-header">
+												<h4 class="modal-title text-primary">UPDATE WiKis</h4>
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
 											</div>
+											<!-- Modal Body -->
+											<div class="modal-body">
+												<form method="POST" action="/author/parametre/update">
+                                                        <input type="hidden" name="action" value="update">
+														<input type="hidden" name="id" value="<?=$wiki['id']?>"><input type="hidden" name="id" value="<?=$wiki['id']?>">
+													<div class="form-group">
+														<label for="CategorieName">WiKi Name:</label>
+														<input type="text" value ="<?=$wiki['nom']?>" class="form-control" id="CategorieName" placeholder="Le Nom De WiKi" name="nom" required>
+														<label for="myTextarea">Contenu De Wiki:</label>
+														
+                                                        <textarea class="form-control" id="myTextarea" placeholder="Le Contenu" name="contenu" rows="4" cols="50" required><?=$wiki['contenu']?></textarea>
+														<label for="Categorie">La Categorie</label>
+														<select type="text" class="form-control" id="Categorie" placeholder="CategorieName" name="categorie" required>
+                                                               <?php foreach ($cateRow as $categorie){ ?>  
+														       <option value="<?=$categorie['id']?>"><?=$categorie['nom']?></option>
+															   <?php } ?>
+                                                        </select>
+                                                        <br>
+                                                        <div class="form-group">
+                                                            <label>Les Tags :</label><br>
+                                                            <?php foreach($tagRow as $tag) { ?>
+                                                              <div class="form-check">
+                                                                 <input type="checkbox" class="form-check-input" id="tag<?=$tag['id']?>" name="tags[]" value="<?=$tag['id']?>">
+                                                                 <label class="form-check-label" for="tag<?=$tag['id']?>"><?=$tag['nom']?></label>
+                                                              </div>
+                                                            <?php } ?>
+                                                        </div>
+
+													</div>  
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+														<button type="submit" name="add" class="btn btn-primary">Add Wiki</button>
+													</div>
+												</form>
+											</div>
+										</div>
 										</div>
 									</div>
                        <!-- Delete Medicine Modal -->
@@ -238,19 +222,19 @@
 											<div class="modal-content">
 												<!-- Modal Header -->
 												<div class="modal-header">
-													<h4 class="modal-title">Archive le WiKi</h4>
+													<h4 class="modal-title">Supprimer le WiKi</h4>
 													<button type="button" class="close" data-dismiss="modal">&times;</button>
 												</div>
 												<!-- Modal Body -->
 												<div class="modal-body">
 													<!-- Delete medicine form -->
-													<form method="POST" action="/wiki/delete">
+													<form method="POST" action="/author/parametre/delete">
 													<input type="hidden" name="action" value="delete">
-														<input type="hidden" name="id" value="<?= $wiki['id'] ?>">
-														<p>Are you sure you want to archive this WiKi?</p>
+														<input type="hidden" name="id" value="<?= $wiki['id']?>">
+														<p>Are you sure you want to delete this WiKi?</p>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-															<button type="submit" class="btn btn-danger">Archiver Le WiKi</button>
+															<button type="submit" class="btn btn-danger">Delete Le WiKi</button>
 														</div>
 													</form>
 												</div>
