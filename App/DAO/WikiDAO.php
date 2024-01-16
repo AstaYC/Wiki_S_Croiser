@@ -152,6 +152,7 @@ class WikiDAO {
                  return $stmt->fetchAll(\PDO::FETCH_ASSOC) ;
              } 
 
+             
              public function totalWiki(){
                 try{
                     $query = "SELECT COUNT(*) AS total FROM wiki";

@@ -15,8 +15,8 @@ class LoginController {
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])){
                         
-            $email = $_POST['email'];
-            $password = $_POST['password'];
+            $email = htmlspecialchars($_POST['email']);
+            $password = htmlspecialchars($_POST['password']);
             $getEmail = new UsersDAO();
             $row = $getEmail->getUserByEmail($email);
         

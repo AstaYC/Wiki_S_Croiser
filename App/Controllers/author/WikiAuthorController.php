@@ -31,7 +31,7 @@
                 <div class="col-lg-12">
                     <div class=" tm-timeline-item">
                         <div class="tm-timeline-item-inner">
-                            <img src="\assets/img/img-01.jpg" alt="Image" class="rounded-circle tm-img-timeline">
+                            <img src="https://wallpapercave.com/wp/wp8188619.jpg" alt="Image" class="rounded-circle tm-img-timeline">
                             <div class="tm-timeline-connector">
                                 <p class="mb-0">&nbsp;</p>
                             </div>
@@ -65,7 +65,7 @@
      <div class="row">
          <!-- Colonne pour l'image -->
          <div class="col-lg-12 text-center">
-             <img src="\assets/img/img-01.jpg" alt="Image" class="img-fluid mb-3">
+             <img src="https://wallpapercave.com/wp/wp8188619.jpg" alt="Image" class="img-fluid mb-3">
          </div>
      </div>
      <div class="row">

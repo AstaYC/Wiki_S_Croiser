@@ -16,10 +16,10 @@ class RegisterController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])){
 
                 $id ='';
-                $nom = $_POST['nom'];
-                $email = $_POST['email'];
-                $password = $_POST['password'];
-                $password_2 = $_POST['password_2'];
+                $nom = htmlspecialchars($_POST['nom']);
+                $email = htmlspecialchars($_POST['email']);
+                $password = htmlspecialchars($_POST['password']);
+                $password_2 =htmlspecialchars($_POST['password_2']);
                 $type = 'author';
     
                 if ($password === $password_2){

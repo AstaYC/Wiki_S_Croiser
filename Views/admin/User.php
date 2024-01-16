@@ -115,7 +115,7 @@ if($_SESSION['type'] != 'admin'){
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>My Categories</h1>
+					<h1>My USERS</h1>
 				</div>
 				
 			</div>
@@ -127,7 +127,7 @@ if($_SESSION['type'] != 'admin'){
 						<div class="table-title">
 							<div class="row">
 								<div class="col-sm-5">
-									<h2>Categories <b>Management</b></h2>
+									<h2>Users <b>Management</b></h2>
 								</div>
 							</div>
 						</div>
