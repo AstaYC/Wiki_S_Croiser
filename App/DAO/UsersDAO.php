@@ -45,5 +45,20 @@ class UsersDAO {
   
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function totalUser(){
+        try{
+            $query = "SELECT COUNT(*) AS total FROM users";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+        }  catch (\Exception $e){
+          echo "Error" . $e->getMessage();
+        }
+  
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
 }
+
+
 ?>

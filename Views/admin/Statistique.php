@@ -1,10 +1,3 @@
-
-<?php
-if($_SESSION['type'] != 'admin'){
-    header("Location:/author");
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,31 +7,21 @@ if($_SESSION['type'] != 'admin'){
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="assets/css/dashboard.css">
+	<link rel="stylesheet" href="/assets/css/dashboard.css">
 
-	<title>My WiKiS</title>
+	<title>AdminHub</title>
 </head>
-<style>
-
-</style>
 <body>
 
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="#" class="brand">
+		<a href="admin" class="brand">
 			<i class='bx bxs-smile'></i>
 			<span class="text">Admin</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="active">
+			<li lass="active">
 				<a href="/user">
 					<i class='bx bxs-group' ></i>
 					<span class="text">USers</span>
@@ -68,7 +51,7 @@ if($_SESSION['type'] != 'admin'){
 					<span class="text">Les Wikis Archivee</span>
 				</a>
 			</li>
-            <li>
+            <li class="active">
 				<a href="/dachboard">
 				    <i class='bx bxs-dashboard'></i>
 					<span class="text">Dachboard</span>
@@ -76,6 +59,7 @@ if($_SESSION['type'] != 'admin'){
 			</li>
 		</ul>
 		<ul class="side-menu">
+
 			<li>
 				<a href="/logout" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>
@@ -93,7 +77,7 @@ if($_SESSION['type'] != 'admin'){
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link">Users</a>
+			<a href="#" class="nav-link">Categories</a>
 			<form action="#">
 				<div class="form-input">
 					<input type="search" placeholder="Search...">
@@ -106,7 +90,7 @@ if($_SESSION['type'] != 'admin'){
 				<span class="num">8</span>
 			</a>
 			<a href="#" class="profile">
-				<img src="img/people.png">
+				<img src="assets/img/people.png">
 			</a>
 		</nav>
 		<!-- NAVBAR -->
@@ -115,53 +99,56 @@ if($_SESSION['type'] != 'admin'){
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>My Categories</h1>
+					<h1>Dashboard</h1>
 				</div>
 				
 			</div>
 
+			<ul class="box-info">
+				<li>
+					<i class='bx bxs-group' ></i>
+					<span class="text">
+						<?php foreach ($userRow as $userRow){?>
+					    <h3><?=$userRow['total']?></h3>
+						<p>Total Users</p>
+						<?php } ?>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text">
+					<?php foreach ($wikiRow as $wikiRow){?>
+					    <h3><?=$wikiRow['total']?></h3>
+						<p>Total WiKis</p>
+						<?php } ?>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">
+					<?php foreach ($categorieRow as $categorieRow){?>
+					    <h3><?=$categorieRow['total']?></h3>
+						<p>Total Categories</p>
+						<?php }?>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-message-dots' ></i>
+					<span class="text">
+					<?php foreach ($tagRow as $tagRow){?>
+					    <h3><?=$tagRow['total']?></h3>
+						<p>Total Tags</p>
+						<?php }?>
+					</span>
+				</li>
+			</ul>
 
-			<div class="container-xl">
-				<div class="table-responsive">
-					<div class="table-wrapper">
-						<div class="table-title">
-							<div class="row">
-								<div class="col-sm-5">
-									<h2>Categories <b>Management</b></h2>
-								</div>
-							</div>
-						</div>
-						<table class="table table-striped table-hover">
-							<thead>
-								<tr>
-									<th>ID</th>
-									<th>Nom de User</th>
-									<th>Email</th>
-									<th>le Role</th>
-									<th>Action</th>
-								</tr>
-							</thead>
-							<tbody>	
-							<?php foreach($row as $user){?>
-								<tr>
-									<td><?=$user['id']?></td>
-									<td><?=$user['nom']?></td>
-									<td><?=$user['email']?></td>
-									<td><?=$user['type']?></td>
-									<td>
-											<a href="#" class="settings">
-												<i class="material-icons">&#xE7FD;</i>
-											</a>
-										</td>
-								</tr>
-							<?php } ?>
-                         </tbody>
-						</table>
-					</div>
-				</div>
-			</div>  
 		</main>
+		<!-- MAIN -->
 	</section>
+	<!-- CONTENT -->
+	
+
 	<script src="../../public/assets/js/script.js"></script>
 </body>
 </html>

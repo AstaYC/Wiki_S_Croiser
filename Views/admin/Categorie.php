@@ -37,9 +37,9 @@ if($_SESSION['type'] != 'admin'){
 			<span class="text">Admin</span>
 		</a>
 		<ul class="side-menu top">
-			<li lass="active">
+			<li>
 				<a href="/user">
-					<i class='bx bxs-dashboard' ></i>
+					<i class='bx bxs-group' ></i>
 					<span class="text">USers</span>
 				</a>
 			</li>
@@ -49,7 +49,7 @@ if($_SESSION['type'] != 'admin'){
 					<span class="text">WiKis</span>
 				</a>
 			</li>
-			<li c>
+			<li class="active">
 				<a href="/categorie">
 					<i class='bx bxs-doughnut-chart' ></i>
 					<span class="text">Categories</span>
@@ -65,6 +65,12 @@ if($_SESSION['type'] != 'admin'){
 				<a href="/wikiArchive">
 				    <i class='bx bxs-archive' ></i>
 					<span class="text">Les Wikis Archivee</span>
+				</a>
+			</li>
+            <li>
+				<a href="/dachboard">
+				    <i class='bx bxs-dashboard'></i>
+					<span class="text">Dachboard</span>
 				</a>
 			</li>
 		</ul>

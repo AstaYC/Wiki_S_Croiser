@@ -25,7 +25,6 @@
          if (isset($_GET['keyWord'])){
          $wiki = new WikiDAO();
          $row = $wiki->serachWiki($_GET['keyWord']);
-         echo'chihaja';
 
       foreach($row as $wiki) { ?>
             <div class="row tm-section-mb">

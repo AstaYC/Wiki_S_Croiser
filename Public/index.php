@@ -12,6 +12,7 @@ use App\DAO\WikiTagDAO;
 use App\Controllers\admin\WikiController;
 use App\Controllers\admin\CategorieController;
 use App\Controllers\admin\TagController;
+use App\Controllers\admin\StatistiqueController;
 use App\Controllers\author\WikiAuthorController;
 use App\Routes\Router;
 
@@ -35,6 +36,7 @@ $router->get('/wikiArchive',fn()=>WikiController::indexArch());
 $router->get('/user',fn()=>DisplayUser::displayUser());
 $router->get('/categorie',fn()=> CategorieController::index());
 $router->get('/tag', fn()=>TagController::index());
+$router->get('/dachboard',fn()=>StatistiqueController::index());
 
 $router->get('/author', fn()=>WikiAuthorController::index());
 $router->get('/author/parametre', fn()=>WikiAuthorController::gererWiki());

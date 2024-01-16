@@ -51,6 +51,20 @@ class CategorieDAO {
             echo "Erreur" . $e->getMessage();
         }
     }
+
+    public function totalCategorie(){
+        try{
+            $query = "SELECT COUNT(*) AS total FROM categorie";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+        }  catch (\Exception $e){
+          echo "Error" . $e->getMessage();
+        }
+  
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
     
 }
+    
+
 ?>  
