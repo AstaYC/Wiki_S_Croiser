@@ -23,7 +23,7 @@
                   <div class="col-md-6 col-lg-7 d-flex align-items-center">
                     <div class="card-body p-4 p-lg-5 text-black">      
 
-                      <form method="POST" action=''>      
+                      <form method="POST" onsubmit="return validateFormLogin()">      
 
                         <div class="d-flex align-items-center mb-3 pb-1">
                           <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
@@ -34,12 +34,12 @@
 
                         <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example17">Email address</label>  
-                        <input type="email" name="email" class="form-control form-control-lg" />
+                        <input type="email" id="email" name="email" class="form-control form-control-lg" />
                         </div>      
 
                         <div class="form-outline mb-4">
                           <label class="form-label" for="form2Example27">Password</label>
-                          <input type="password" name="password"  class="form-control form-control-lg" />
+                          <input type="password" id="password" name="password"  class="form-control form-control-lg" />
                         </div>      
 
                         <div class="pt-1 mb-4">
@@ -62,5 +62,29 @@
           </div>
         </div>
       </section>
+
+      <script>
+
+// validation.js
+         function validateFormLogin() {
+
+               var email = document.getElementById('email').value;
+               var password = document.getElementById('password').value;
+
+
+                var emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
+               if (!emailRegex.test(email)) {
+                     alert('Invalid email format');
+                     return false;
+                   }
+
+                if (password.trim() === '') { 
+                      alert('Please enter a password');
+                      return false;
+                   }
+
+               return true;
+                }
+      </script>
 </body>
 </html>

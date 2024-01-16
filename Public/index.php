@@ -26,7 +26,7 @@ $method = strtolower($_SERVER["REQUEST_METHOD"]);
 $router = new Router();
 
 // ------> GET ROUTER ;
-
+$router->get('/',fn() => LoginController::index());
 $router->get('/register',fn () => RegisterController::index());
 $router->get('/login',fn() => LoginController::index());
 
